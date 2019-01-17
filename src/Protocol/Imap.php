@@ -62,7 +62,7 @@ class Imap
      * @throws Exception\RuntimeException
      * @return string welcome message
      */
-    public function connect($host, $port = null, $ssl = false)
+    public function connect($host, $port = null, $ssl = false, $verifyPeer = true)
     {
         $isTls = false;
 
@@ -87,7 +87,21 @@ class Imap
         }
 
         ErrorHandler::start();
-        $this->socket = fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+
+        if (!$verifyPeer) {
+            $contextData = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ];
+        } else {
+            $contextData = [];
+        }
+
+        $context = stream_context_create($contextData);
+        $this->socket = stream_socket_client($host . ':' . $port, $errno, $errstr, self::TIMEOUT_CONNECTION, STREAM_CLIENT_CONNECT, $context);
+
         $error = ErrorHandler::stop();
         if (! $this->socket) {
             throw new Exception\RuntimeException(sprintf(

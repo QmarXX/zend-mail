@@ -210,9 +210,10 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         $password = isset($params->password) ? $params->password : '';
         $port     = isset($params->port) ? $params->port : null;
         $ssl      = isset($params->ssl) ? $params->ssl : false;
+        $verifyPeer = isset($params->verify_peer) ? $params->verify_peer : true;
 
         $this->protocol = new Protocol\Imap();
-        $this->protocol->connect($host, $port, $ssl);
+        $this->protocol->connect($host, $port, $ssl, $verifyPeer);
         if (! $this->protocol->login($params->user, $password)) {
             throw new Exception\RuntimeException('cannot login, user or password wrong');
         }
