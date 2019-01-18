@@ -107,6 +107,11 @@ class Pop3 extends AbstractStorage
         return $body;
     }
 
+    public function getRawSource($id)
+    {
+        return '';
+    }
+
     /**
      * create instance with parameters
      * Supported parameters are

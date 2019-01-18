@@ -167,6 +167,11 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         return $this->protocol->fetch('RFC822.TEXT', $id);
     }
 
+    public function getRawSource($id)
+    {
+        return $this->protocol->fetch('BODY[]', $id);
+    }
+
     /**
      * create instance with parameters
      *

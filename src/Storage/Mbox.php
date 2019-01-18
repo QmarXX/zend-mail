@@ -178,6 +178,11 @@ class Mbox extends AbstractStorage
         return stream_get_contents($this->fh, $messagePos['end'] - $messagePos['separator'], $messagePos['separator']);
     }
 
+    public function getRawSource($id)
+    {
+        return '';
+    }
+
     /**
      * Create instance with parameters
      * Supported parameters are:

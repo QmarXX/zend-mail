@@ -123,6 +123,8 @@ abstract class AbstractStorage implements
      */
     abstract public function getRawContent($id, $part = null);
 
+    abstract public function getRawSource($id);
+
     /**
      * Create instance with parameters
      *

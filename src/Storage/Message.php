@@ -82,4 +82,9 @@ class Message extends Part implements Message\MessageInterface
     {
         return $this->flags;
     }
+
+    public function getSource()
+    {
+        return $this->mail->getRawSource($this->messageNum);
+    }
 }

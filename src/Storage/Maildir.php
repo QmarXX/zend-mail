@@ -209,6 +209,11 @@ class Maildir extends AbstractStorage
         return $content;
     }
 
+    public function getRawSource($id)
+    {
+        return '';
+    }
+
     /**
      * Create instance with parameters
      * Supported parameters are:
