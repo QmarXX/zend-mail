@@ -527,9 +527,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      * @param array $flags new flags for message
      * @throws Exception\RuntimeException
      */
-    public function setFlags($id, $flags)
+    public function setFlags($id, $flags, $mode = null)
     {
-        if (! $this->protocol->store($flags, $id)) {
+        if (! $this->protocol->store($flags, $id, null, $mode)) {
             throw new Exception\RuntimeException(
                 'cannot set flags, have you tried to set the recent flag or special chars?'
             );
